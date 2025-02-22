@@ -1,0 +1,28 @@
+//1、MySQL的启动与停止
+//方法1
+win+r 输入servies.msc 在界面中找到Mysql80并启动服务或者关闭或者重启服务
+//方法2
+打开命令行工具输入net stop mysql80停止，输入net start mysql80
+
+//1.5、在一般的命令行工具中，使用以下代码登录MySQL
+mysql -u root -p
+Enter password:123456//输完上一句之后输入密码
+
+//剩下的操作基本上在MySQL 8.0 Command Line Client - Unicode中执行
+//2、查看当前所有数据库
+show databases;
+
+//3、创建数据库
+create database 数据库名;
+
+//4、删除数据库
+drop database 数据库名;
+
+//5、进入数据库（进入文件）
+use 数据库;
+
+//6、进入数据库之后查看当前数据库中所有的数据表
+show tables;
+
+//7、查看当前状态（包括当前进入的数据库、当前数据库的编码等等）
+status;

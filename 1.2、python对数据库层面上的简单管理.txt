@@ -1,0 +1,39 @@
+//1、用管理员身份打开命令行工具然后安装第三方模块
+pip install pymysql
+
+//2、引入pymysql库之后，创建pymysql连接对象，其中参数如下示例
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='123456', charset='utf8')
+
+//3、创建pymysql光标对象，代向命令行传入mysql简单命令
+cursor = conn.cursor()
+
+//4、利用光标对象执行命令：查看数据库
+cursor.execute('show databases')
+
+//5、此时，查询结果要通过光标对象来获取
+result = cursor.fetchall()		#result结果为元组，示例结果如下
+# 打印结果样例：(('day26db',), ('information_schema',), ('mysql',), ('performance_schema',), ('sys',))
+
+//6、利用光标对象执行命令：创建数据库
+cursor.execute('create database db03 default charset utf8 collate utf8_general_ci')  # 若创建数据库名字已存在，则报错
+
+//7、发出写入命令（例如创建数据库或者删除数据库或者增删改查数据库数据）后，需要使用连接对象来进行提交
+//相反的若只是发出读取命令（例如查看数据库或者查看数据表）时，直接通过cursor.fetchall()来获取结果即可
+conn.commit()
+
+//8、利用光标对象执行命令：删除数据库
+//并且发出指令
+cursor.execute('drop database db03')
+conn.commit()
+
+//9、进入数据库，查看表
+cursor.execute('use mysql')
+cursor.execute('show tables')
+result = cursor.fetchall()
+print(result)
+
+//10、关闭光标对象和pymysql连接对象（注意先后顺序）
+cursor.close()
+conn.close()
+
+
